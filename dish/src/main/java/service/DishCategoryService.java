@@ -1,6 +1,6 @@
 package service;
 
-import model.DishCategory;
+import ru.job4j.fastfood.domain.model.DishCategory;
 
 import java.util.List;
 import java.util.Optional;
