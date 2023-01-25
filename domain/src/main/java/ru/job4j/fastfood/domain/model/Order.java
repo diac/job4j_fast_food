@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.job4j.fastfood.domain.enumeration.OrderStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,4 +43,9 @@ public class Order {
      * Дата и время регистрации заказа в системе
      */
     private LocalDateTime dateTime;
+
+    /**
+     * Статус заказа
+     */
+    private OrderStatus status;
 }
