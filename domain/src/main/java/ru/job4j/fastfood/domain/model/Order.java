@@ -48,4 +48,8 @@ public class Order {
      * Статус заказа
      */
     private OrderStatus status;
+
+    public Order(int id) {
+        this.id = id;
+    }
 }
