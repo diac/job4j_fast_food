@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: htmlHead"></head>
+<body>
+<div class="container">
+    <h1>Новое блюдо</h1>
+    <form
+            th:action="@{/dishes/store}"
+            method="post"
+    >
+        <div class="form-group">
+            <label for="name">Наименование</label>
+            <input id="name" class="form-control" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Цена</label>
+            <input id="price" class="form-control" name="price" type="number" min="0" step="1">
+        </div>
+
+        <div class="controls">
+            <button type="submit" class="btn btn-success">Сохранить</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
