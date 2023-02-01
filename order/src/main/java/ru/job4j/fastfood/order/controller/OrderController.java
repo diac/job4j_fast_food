@@ -3,7 +3,6 @@ package ru.job4j.fastfood.order.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.fastfood.domain.model.Order;
 import ru.job4j.fastfood.order.dto.OrderPlacementDto;
@@ -19,19 +18,9 @@ import javax.validation.Valid;
 public class OrderController {
 
     /**
-     * Тема Kafka для обмена сообщениями с сервисом notification
-     */
-    private static final String NOTIFICATION_TOPIC = "messengers";
-
-    /**
      * Сервис, реализующий логику работы с объектами Order
      */
     private final OrderService orderService;
-
-    /**
-     * Бин KafkaTemplate, через который осуществляется взаимодействие между микросервисами
-     */
-    private final KafkaTemplate<Integer, String> kafkaTemplate;
 
     /**
      * Добавить новый заказ
@@ -42,7 +31,6 @@ public class OrderController {
     @PostMapping("/order/place")
     public ResponseEntity<Order> place(@RequestBody @Valid OrderPlacementDto dto) {
         Order order = orderService.place(dto);
-        kafkaTemplate.send(NOTIFICATION_TOPIC, String.format("New order #%d", order.getId()));
         return new ResponseEntity<>(
                 order,
                 HttpStatus.CREATED
