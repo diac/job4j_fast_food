@@ -30,7 +30,7 @@ public class SimpleOrderService implements OrderService {
     /**
      * Бин KafkaTemplate, через который осуществляется взаимодействие между микросервисами
      */
-    private final KafkaTemplate<Integer, String> kafkaTemplate;
+    private final KafkaTemplate<Integer, Order> kafkaTemplate;
 
     /**
      * Разместить заказ, т.е. создать новый
@@ -49,7 +49,7 @@ public class SimpleOrderService implements OrderService {
                         OrderStatus.CREATED
                 )
         );
-        kafkaTemplate.send(NOTIFICATION_TOPIC, String.format("New order #%d", order.getId()));
+        kafkaTemplate.send(NOTIFICATION_TOPIC, order);
         return order;
     }
 
