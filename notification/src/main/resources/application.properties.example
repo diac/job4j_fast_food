@@ -1,12 +1,10 @@
-spring.datasource.url=jdbc:db_url
+spring.datasource.url=db_url
 spring.datasource.username=db_user
 spring.datasource.password=db_password
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
-spring.jpa.hibernate.ddl-auto=none
 spring.liquibase.change-log=classpath:db/liquibase-changelog.xml
-spring.kafka.consumer.group-id=kafka_group_id
+spring.kafka.consumer.group-id=kafka_consumer_group_id
 spring.kafka.bootstrap-servers=kafka_bootstrap_servers
-dish-api-url=dish_api_url

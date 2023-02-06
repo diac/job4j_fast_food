@@ -34,3 +34,4 @@ build/
 /domain/db/liquibase.properties
 /order/src/main/resources/application.properties
 /dish/src/main/resources/application.properties
+/notification/src/main/resources/application.properties

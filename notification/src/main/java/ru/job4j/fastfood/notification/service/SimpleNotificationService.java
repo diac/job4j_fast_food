@@ -37,7 +37,7 @@ public class SimpleNotificationService implements NotificationService {
         Notification notification = new Notification(
                 0,
                 String.format("Новый заказ №%d", order.getId()),
-                order
+                order.getId()
         );
         return notificationRepository.save(notification);
     }
