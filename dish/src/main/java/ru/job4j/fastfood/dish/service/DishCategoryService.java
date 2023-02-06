@@ -1,4 +1,4 @@
-package service;
+package ru.job4j.fastfood.dish.service;
 
 import ru.job4j.fastfood.domain.model.DishCategory;
 

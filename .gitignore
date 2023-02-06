@@ -33,3 +33,4 @@ build/
 .vscode/
 /domain/db/liquibase.properties
 /order/src/main/resources/application.properties
+/dish/src/main/resources/application.properties
