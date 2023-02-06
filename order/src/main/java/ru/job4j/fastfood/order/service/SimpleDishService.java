@@ -1,6 +1,5 @@
 package ru.job4j.fastfood.order.service;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,7 +11,6 @@ import java.util.Optional;
  * Сервис для работы с объектами модели Dish
  */
 @Service
-@AllArgsConstructor
 public class SimpleDishService implements DishService {
 
     /**
@@ -23,8 +21,12 @@ public class SimpleDishService implements DishService {
     /**
      * URL API сервиса "Dish"
      */
-    @Value("${dish-api-url}")
-    private String dishApiUrl;
+    private final String dishApiUrl;
+
+    public SimpleDishService(RestTemplate restTemplate, @Value("${dishApiUrl}") String dishApiUrl) {
+        this.restTemplate = restTemplate;
+        this.dishApiUrl = dishApiUrl;
+    }
 
     @Override
     public Optional<Dish> findById(int id) {
