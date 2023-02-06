@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import ru.job4j.fastfood.domain.enumeration.OrderStatus;
+import ru.job4j.fastfood.domain.model.Dish;
 import ru.job4j.fastfood.domain.model.Order;
 import ru.job4j.fastfood.order.dto.OrderPlacementDto;
 import ru.job4j.fastfood.order.repository.OrderRepository;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * Сервис, реализующий логику, связанную с объектами Order
@@ -26,6 +28,11 @@ public class SimpleOrderService implements OrderService {
      * Репозиторий для хранения объектов Order
      */
     private final OrderRepository orderRepository;
+
+    /**
+     * Сервис для работы с объектами модели Dish
+     */
+    private final DishService dishService;
 
     /**
      * Бин KafkaTemplate, через который осуществляется взаимодействие между микросервисами
@@ -97,7 +104,10 @@ public class SimpleOrderService implements OrderService {
      */
     private int calculateSubtotal(OrderPlacementDto dto) {
         return dto.orderItems().stream()
-                .mapToInt(orderItem -> 1_000_000 * orderItem.getQuantity())
+                .mapToInt(orderItem -> {
+                    Optional<Dish> dish = dishService.findById(orderItem.getDishId());
+                    return dish.map(value -> value.getPrice() * orderItem.getQuantity()).orElse(0);
+                })
                 .sum();
     }
 
