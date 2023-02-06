@@ -5,9 +5,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 /**
  * Модель данных "Блюдо"
  */
+@Entity
+@Table(name = "dish")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +21,8 @@ public class Dish {
     /**
      * Идентификатор блюда
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int id;
 
@@ -33,5 +39,7 @@ public class Dish {
     /**
      * Категория блюда
      */
+    @ManyToOne
+    @JoinColumn(name = "dish_category_id")
     private DishCategory dishCategory;
 }

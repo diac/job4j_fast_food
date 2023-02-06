@@ -5,9 +5,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 /**
  * Модель данных "Категория блюд"
  */
+@Entity
+@Table(name = "dish_category")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +21,8 @@ public class DishCategory {
     /**
      * Идентификатор категории блюд
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int id;
 

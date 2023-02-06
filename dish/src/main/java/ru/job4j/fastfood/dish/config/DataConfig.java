@@ -16,6 +16,8 @@ import javax.sql.DataSource;
 @EnableJpaRepositories("ru.job4j.fastfood.dish.repository")
 public class DataConfig {
 
+    private static final String DOMAIN_MODEL_PACKAGES_LOCATION = "ru.job4j.fastfood.domain.model";
+
     @Primary
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource ds) {
@@ -23,7 +25,7 @@ public class DataConfig {
         vendorAdapter.setGenerateDdl(true);
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("ru.job4j.fastfood.dish");
+        factory.setPackagesToScan(DOMAIN_MODEL_PACKAGES_LOCATION);
         factory.setDataSource(ds);
         return factory;
     }
