@@ -1,0 +1,9 @@
+spring.datasource.url=db_url
+spring.datasource.username=db_user
+spring.datasource.password=db_password
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+spring.kafka.consumer.group-id=kafka_consumer_group_id
+spring.kafka.bootstrap-servers=kafka_bootstrap_servers

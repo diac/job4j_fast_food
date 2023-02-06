@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 /domain/db/liquibase.properties
+/order/src/main/resources/application.properties
