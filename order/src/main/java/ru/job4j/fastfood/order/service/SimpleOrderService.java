@@ -97,7 +97,7 @@ public class SimpleOrderService implements OrderService {
      */
     private int calculateSubtotal(OrderPlacementDto dto) {
         return dto.orderItems().stream()
-                .mapToInt(orderItem -> orderItem.getDish().getPrice() * orderItem.getQuantity())
+                .mapToInt(orderItem -> 1_000_000 * orderItem.getQuantity())
                 .sum();
     }
 

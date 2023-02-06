@@ -6,9 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 /**
  * Модель данных "Позиция заказа"
  */
+@Entity
+@Table(name = "order_item")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,13 +22,16 @@ public class OrderItem {
     /**
      * Идентификатор позиции заказа
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int id;
 
     /**
      * Блюдо
      */
-    private Dish dish;
+    @Column(name = "dish_id")
+    private int dishId;
 
     /**
      * Количество одинаковых блюд в позиции
@@ -35,4 +42,11 @@ public class OrderItem {
      * Цена позиции (цена блюда, умноженная на количество)
      */
     private int price;
+
+    /**
+     * Заказ, в котором находится позиция
+     */
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 }

@@ -6,12 +6,15 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.job4j.fastfood.domain.enumeration.OrderStatus;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * Модель данных "Заказ"
  */
+@Entity
+@Table(name = "order")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,12 +24,16 @@ public class Order {
     /**
      * Идентификатор заказа
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int id;
 
     /**
      * Перечень позиций в заказе
      */
+    @OneToMany
+    @JoinColumn(name = "order_id")
     private List<OrderItem> orderItems;
 
     /**
@@ -47,5 +54,6 @@ public class Order {
     /**
      * Статус заказа
      */
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 }
