@@ -46,20 +46,22 @@ public class SimpleDishService implements DishService {
      * Добавить новое блюдо в систему
      *
      * @param dish Новое блюдо
+     * @return Созданное блюдо
      */
     @Override
-    public void add(Dish dish) {
-        dishRepository.save(dish);
+    public Dish add(Dish dish) {
+        return dishRepository.save(dish);
     }
 
     /**
      * Обновить данные блюда в системе
      *
      * @param dish Блюдо, данные которого необходимо обновить
+     * @return Обновленное блюдо
      */
     @Override
-    public void update(Dish dish) {
-        dishRepository.save(dish);
+    public Dish update(Dish dish) {
+        return dishRepository.save(dish);
     }
 
     /**

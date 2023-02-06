@@ -30,15 +30,17 @@ public interface DishService {
      * Добавить новое блюдо в систему
      *
      * @param dish Новое блюдо
+     * @return Созданное блюдо
      */
-    void add(Dish dish);
+    Dish add(Dish dish);
 
     /**
      * Обновить данные блюда в системе
      *
      * @param dish Блюдо, данные которого необходимо обновить
+     * @return Обновленное блюдо
      */
-    void update(Dish dish);
+    Dish update(Dish dish);
 
     /**
      * Удалить блюдо из системы
