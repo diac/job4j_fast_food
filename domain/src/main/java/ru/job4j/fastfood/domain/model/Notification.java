@@ -5,9 +5,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 /**
  * Модель данных "Уведомление"
  */
+@Entity
+@Table(name = "notification")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +21,8 @@ public class Notification {
     /**
      * Идентификатор уведомления
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int id;
 
@@ -26,7 +32,8 @@ public class Notification {
     private String text;
 
     /**
-     * Заказ, к которому относится уведомление
+     * Идентификатор заказа, к которому относится уведомление
      */
-    private Order order;
+    @Column(name = "order_id")
+    private int orderId;
 }
