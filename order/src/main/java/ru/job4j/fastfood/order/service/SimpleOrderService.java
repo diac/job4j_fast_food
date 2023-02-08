@@ -25,6 +25,11 @@ public class SimpleOrderService implements OrderService {
     private static final String NOTIFICATION_TOPIC = "messengers";
 
     /**
+     * Тема Kafka для оповещения сервиса Kitchen о поступившем заказе
+     */
+    private static final String PREORDER_TOPIC = "preorder";
+
+    /**
      * Репозиторий для хранения объектов Order
      */
     private final OrderRepository orderRepository;
@@ -57,6 +62,7 @@ public class SimpleOrderService implements OrderService {
                 )
         );
         kafkaTemplate.send(NOTIFICATION_TOPIC, order);
+        kafkaTemplate.send(PREORDER_TOPIC, order);
         return order;
     }
 
