@@ -3,6 +3,7 @@ package ru.job4j.fastfood.order.service;
 import lombok.AllArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import ru.job4j.fastfood.domain.dto.OrderStatusChangeDto;
 import ru.job4j.fastfood.domain.enumeration.OrderStatus;
 import ru.job4j.fastfood.domain.model.Dish;
 import ru.job4j.fastfood.domain.model.Order;
@@ -100,6 +101,26 @@ public class SimpleOrderService implements OrderService {
     public Order cancel(Order order) {
         order.setStatus(OrderStatus.CANCELED);
         return orderRepository.save(order);
+    }
+
+    /**
+     * Обновить статус заказа по ID
+     *
+     * @param id Идентификатор заказа
+     * @param orderStatus Новый статус заказа
+     */
+    @Override
+    public void updateStatus(int id, OrderStatus orderStatus) {
+        orderRepository.findById(id)
+                .map(order -> {
+                    order.setStatus(orderStatus);
+                    return orderRepository.save(order);
+                });
+    }
+
+    @Override
+    public void updateStatus(OrderStatusChangeDto dto) {
+        updateStatus(dto.getOrderId(), dto.getOrderStatus());
     }
 
     /**

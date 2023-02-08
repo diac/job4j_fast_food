@@ -1,9 +1,12 @@
 package ru.job4j.fastfood.order.controller;
 
 import lombok.AllArgsConstructor;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.*;
+import ru.job4j.fastfood.domain.dto.OrderStatusChangeDto;
 import ru.job4j.fastfood.domain.model.Order;
 import ru.job4j.fastfood.order.dto.OrderPlacementDto;
 import ru.job4j.fastfood.order.service.OrderService;
@@ -21,6 +24,11 @@ public class OrderController {
      * Сервис, реализующий логику работы с объектами Order
      */
     private final OrderService orderService;
+
+    /**
+     * Тема Kafka для обмена сообщениями об изменении статуса заказа с кухней
+     */
+    private static final String COOKED_ORDER_TOPIC = "cooked_order";
 
     /**
      * Добавить новый заказ
@@ -83,5 +91,10 @@ public class OrderController {
                 orderService.cancel(order),
                 HttpStatus.OK
         );
+    }
+
+    @KafkaListener(topics = {COOKED_ORDER_TOPIC})
+    public void listenCookedOrderTopic(ConsumerRecord<Integer, OrderStatusChangeDto> input) {
+        orderService.updateStatus(input.value());
     }
 }

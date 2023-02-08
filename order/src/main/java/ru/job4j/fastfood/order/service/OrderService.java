@@ -1,5 +1,7 @@
 package ru.job4j.fastfood.order.service;
 
+import ru.job4j.fastfood.domain.dto.OrderStatusChangeDto;
+import ru.job4j.fastfood.domain.enumeration.OrderStatus;
 import ru.job4j.fastfood.domain.model.Order;
 import ru.job4j.fastfood.order.dto.OrderPlacementDto;
 
@@ -39,4 +41,19 @@ public interface OrderService {
      * @return Отмененный заказ
      */
     Order cancel(Order order);
+
+    /**
+     * Обновить статус заказа по ID
+     *
+     * @param id Идентификатор заказа
+     * @param orderStatus Новый статус заказа
+     */
+    void updateStatus(int id, OrderStatus orderStatus);
+
+    /**
+     * Обновить статус заказа
+     *
+     * @param dto DTO с параметрами изменения статуса
+     */
+    void updateStatus(OrderStatusChangeDto dto);
 }
